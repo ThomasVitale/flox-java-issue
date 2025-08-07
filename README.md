@@ -1,1 +1,83 @@
-# flox-java-issue
+# Flox Java Issue
+
+## Host
+
+This Ubuntu environment defines a value for the `JAVA_HOME` environment variable. Let's verify that by running the following command:
+
+```bash
+echo $JAVA_HOME
+```
+
+The result will be `/yolo`.
+
+## Nix Flakes
+
+Let's see what happens when we use Nix Flakes to define a Java development environment.
+
+Navigate to the `graalvm-ce` directory:
+
+```bash
+cd graalvm-ce
+```
+
+Then, activate the Nix development environment:
+
+```bash
+nix develop
+```
+
+Now, print out the JAVA_HOME environment variable:
+
+```bash
+echo $JAVA_HOME
+```
+
+It will correctly point to the Nix store path, such as `/nix/store/abc123-graalvm-ce-24.0.1`.
+
+Exit the environment and go back to the root directory:
+
+```bash
+exit
+cd ..
+```
+
+Try printing the `JAVA_HOME` variable again:
+
+```bash
+echo $JAVA_HOME
+```
+
+It will still print `/yolo`, which is the value defined in the current Ubuntu environment, not the Nix environment. This is expected behavior since the Nix Flakes environment does not modify the host's environment variables.
+
+## Flox
+
+Let's now see what happens when we use Flox instead of plain Nix Flakes.
+
+First, install Flox following [these instructions](https://flox.dev/docs/install-flox/install/#__tabbed_1_3).
+
+Next, navigate to the `flox` directory:
+
+```bash
+cd flox
+```
+
+Then, activate the Nix development environment:
+
+```bash
+flox activate
+```
+
+Print out the JAVA_HOME environment variable:
+
+```bash
+echo $JAVA_HOME
+```
+
+It will print out `/yolo`, which is the value defined in the current Ubuntu environment, not the Nix environment. The Nix Java package usually configures the `JAVA_HOME` variable to point to the Nix store path, but in Flox that doesn't happen.
+
+Exit the environment and go back to the root directory:
+
+```bash
+exit
+cd ..
+```
