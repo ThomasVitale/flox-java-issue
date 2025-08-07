@@ -1,5 +1,7 @@
 # Flox Java Issue
 
+_It's recommended to open this repository in a Devcontainers environment such as GitHub Codespaces or VS Code._
+
 ## Host
 
 This Ubuntu environment defines a value for the `JAVA_HOME` environment variable. Let's verify that by running the following command:
