@@ -77,9 +77,34 @@ echo $JAVA_HOME
 
 It will print out `/yolo`, which is the value defined in the current Ubuntu environment, not the Nix environment. The Nix Java package usually configures the `JAVA_HOME` variable to point to the Nix store path, but in Flox that doesn't happen.
 
-Exit the environment and go back to the root directory:
+Exit the environment.
 
 ```bash
 exit
-cd ..
 ```
+
+Now let's try unsetting the `JAVA_HOME` variable in the host environment:
+
+```bash
+unset JAVA_HOME
+```
+
+Confirm it's empty:
+
+```bash
+echo $JAVA_HOME
+```
+
+Activate the Flox environment again:
+
+```bash
+flox activate
+```
+
+Print out the `JAVA_HOME` variable:
+
+```bash
+echo $JAVA_HOME
+```
+
+The result is an empty string, proving that no matter if the `JAVA_HOME` variable is set or not in the host environment, Flox does not set it automatically, unlike Nix Flakes.
